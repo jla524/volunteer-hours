@@ -1,0 +1,3 @@
+[submodule "volunteer_hours/static/js/qr-scanner"]
+	path = volunteer_hours/static/js/qr-scanner
+	url = https://github.com/nimiq/qr-scanner

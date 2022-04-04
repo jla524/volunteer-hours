@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Clock in/out</title>
+    </head>
+    <body>
+        <form id='sent' action='/sent'>
+			<p><b>Signed in as {{name}}</b></p>
+            <div>
+                <label for='event'><b>Event to clock in/out for</b></label>
+                <br>
+                <select id='event' name='event' method='GET' action='/'>
+                    {% for event in events %}
+                        <option value="{{event}}">{{event}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <input type='submit' id='submit-btn' name='submit-btn'>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Sent</title>
+    </head>
+    <body>
+		<p>{{message}}</p>
+		<form id='form' action='/' hidden>
+			<input type='submit' id='return-btn' name='return-btn'>
+		</form>
+		<script>
+			const returnButton = document.getElementById('return-btn');
+			const timeout = setTimeout(returnToMain, 3000);
+			function returnToMain() {
+				returnButton.click();
+			}
+		</script>
+	</body>
+</html>
