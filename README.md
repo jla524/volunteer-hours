@@ -1,6 +1,6 @@
 # Volunteer Hours
 
-A web application for volunteers to sign in and out with their QR codes.
+A web page for volunteers to clock in and out with their QR codes.
 
 For deploying to Azure app service.
 
