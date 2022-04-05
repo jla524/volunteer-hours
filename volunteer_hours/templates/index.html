@@ -8,7 +8,7 @@
 				line-height: 0;
 			}
 			video {
-				border-radius: 5px;
+				border-radius: 7px;
 			}
        </style>
 	   <link rel='stylesheet' type='text/css' href={{url_for('static', filename='css/style.css')}}>
@@ -60,19 +60,19 @@
             }
             
             function setResult(label, result) {
-                console.log(result.data);
                 label.textContent = result.data;
                 label.style.color = 'teal';
                 clearTimeout(label.highlightTimeout);
                 label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
 
-				$('#submit-btn').click(function() {
-					result = runPyScript(result.data);
-					console.log(result);
-				});
-				submitButton.click();
+				if (result.data.startsWith('LYN')) {
+					$('#submit-btn').click(function() {
+						result = runPyScript(result.data);
+					});
+					submitButton.click();
+				}
             }
-            
+ 
             // Web Cam Scanning
             const scanner = new QrScanner(video, result => setResult(camQrResult, result), {
                 onDecodeError: error => {
@@ -81,6 +81,7 @@
                 },
                 highlightScanRegion: true,
                 highlightCodeOutline: true,
+				preferredCamera: 'user'
             });
             
             scanner.start().then(() => {
