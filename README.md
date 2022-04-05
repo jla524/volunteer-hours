@@ -1,18 +1,24 @@
 # Volunteer Hours
 
-A web application for volunteers to sign in and out with their QR codes.
+A web page for volunteers to clock in and out with their QR codes.
 
 ## Quickstart Guide
 
-1. [Install poetry][1]
+1. Clone this repository with submodules
 
-2. Install dependencies
+```
+git clone --recurse-submodules git@github.com:jla524/volunteer-hours.git
+```
+
+2. [Install poetry][1]
+
+3. Install dependencies
 
 ```
 poetry install
 ```
 
-3. Run a local development server
+4. Start a local development server
 
 ```
 poetry run flask run
