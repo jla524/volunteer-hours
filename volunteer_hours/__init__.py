@@ -7,8 +7,6 @@ from typing import Optional
 from pathlib import Path
 from threading import Lock
 
-from dotenv import dotenv_values, find_dotenv, set_key
-
 
 class ThreadSafeMeta(type):
     """
@@ -40,12 +38,9 @@ class Config(metaclass=ThreadSafeMeta):
         __version = '1.0.0'
         __default_env = 'dev'
         __logfile_name = f'{__package}-{__version}.log'
-        __config = dotenv_values(find_dotenv())
-        __env = __config['APP_ENV']
-        __ragic_api_key = __config['RAGIC_API_KEY']
-        __config_dir = (Path().home() / 'AppData' / 'Local' / __package
-                        if os.name == 'nt'
-                        else Path().home() / '.config' / __package)
+        __env = os.getenv('APP_ENV')
+        __ragic_api_key = os.getenv('RAGIC_API_KEY')
+        __config_dir = Path().home() / '.config' / __package
         __ragic_members_route = 'lynvolunteer/lyn-temp/53'
         __ragic_attendance_route = 'lynvolunteer/lyn-temp/9'
         __ragic_hours_detail = 'lynvolunteer/lyn-temp/55'

@@ -2,21 +2,13 @@
 
 A web application for volunteers to sign in and out with their QR codes.
 
-## Quickstart Guide
+For deploying to Azure app service.
 
-1. [Install poetry][1]
+## Modifications
 
-2. Install dependencies
-
-```
-poetry install
-```
-
-3. Run a local development server
-
-```
-poetry run flask run
-```
+- Use os.getenv instead of dotenv to retrieve environment variable keys
+- Use requirements.txt instead of poetry.lock to store dependencies
+- Set up a continuous deployment workflow
 
 ## Tech Stack
 
@@ -27,5 +19,3 @@ Client-side
 
 Server-side
 - Python (Flask)
-
-[1]: https://python-poetry.org/docs/#installation
