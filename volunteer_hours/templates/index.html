@@ -3,6 +3,15 @@
     <head>
         <meta charset='UTF-8'>
         <title>QR Scanner</title>
+        <style>
+			#video-container {
+				line-height: 0;
+			}
+			video {
+				border-radius: 5px;
+			}
+       </style>
+	   <link rel='stylesheet' type='text/css' href={{url_for('static', filename='css/style.css')}}>
     </head>
     <body>
         <h1>Welcome! Please scan your QR code.</h1>
@@ -18,17 +27,15 @@
             <br>
         </div>
         <div>
-            <b>Preferred camera:</b>
-            <br>
+			<h3><b>Preferred camera:</b></h3>
             <select id='cam-list'>
                 <option value='environment' selected>Environment Facing (default)</option>
                 <option value='user'>User Facing</option>
             </select>
         </div>
         <div>
-            <b>Detected QR code:</b>
-            <br>
-            <span id='cam-qr-result'>None</span>
+			<h3><b>Detected QR code:</b></h3>
+			<p><span id='cam-qr-result'>None</span></p>
         </div>
         <br>
         <form id='form' action='/action' hidden>
@@ -96,16 +103,5 @@
                 scanner.setCamera(event.target.value);
             });
         </script>
-        <style>
-            div {
-            margin-bottom: 16px;
-            }
-            #video-container {
-            line-height: 0;
-            }
-            hr {
-            margin-top: 32px;
-            }
-        </style>
     </body>
 </html>

@@ -1,0 +1,38 @@
+div {
+	margin-bottom: 16px;
+}
+
+h1 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h3 {
+	margin-bottom: 5px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+	margin: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+label {
+	margin-bottom: 0px;
+}
+
+select {
+	height: 25px;
+}
+
+option {
+	height: 80px;
+}
+
+input {
+	width: 125px;
+	font-size: 18px;
+}

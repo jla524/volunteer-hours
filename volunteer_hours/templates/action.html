@@ -3,20 +3,19 @@
     <head>
         <meta charset='UTF-8'>
         <title>Clock in/out</title>
+		<link rel='stylesheet' type='text/css' href={{url_for('static', filename='css/style.css')}}>
     </head>
     <body>
         <form id='sent' action='/sent'>
-			<p><b>Signed in as {{name}}</b></p>
+			<h2><b>Signed in as {{name}}</b></h2>
             <div>
-                <label for='event'><b>Event to clock in/out for</b></label>
-                <br>
+				<h3><label for='event'><b>Event to clock in/out for</b></label></h3>
                 <select id='event' name='event' method='GET' action='/'>
                     {% for event in events %}
                         <option value="{{event}}">{{event}}</option>
                     {% endfor %}
                 </select>
             </div>
-            <br>
             <input type='submit' id='submit-btn' name='submit-btn'>
         </form>
     </body>
