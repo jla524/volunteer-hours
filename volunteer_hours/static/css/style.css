@@ -1,3 +1,8 @@
+body {
+	transform: scale(1.3);
+	transform-origin: 0 0;
+}
+
 div {
 	margin-bottom: 16px;
 }
@@ -25,11 +30,12 @@ label {
 }
 
 select {
-	height: 25px;
+	height: 22px;
 }
 
 option {
 	height: 80px;
+	font-size: 15px;
 }
 
 input {
