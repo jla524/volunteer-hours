@@ -1,6 +1,8 @@
 """
 Define class for member
 """
+from typing import List
+
 from volunteer_hours import Config
 from volunteer_hours.api.ragic import Ragic
 
@@ -50,7 +52,7 @@ class Member:
         info = list(result.values())[0]
         return info['Full Name']
 
-    def get_event_names(self) -> list[str]:
+    def get_event_names(self) -> List[str]:
         """
         Get a list of events names assigned to the member
         :return: a list of events

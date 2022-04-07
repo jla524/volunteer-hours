@@ -1,7 +1,7 @@
 """
 A wrapper for the Ragic API
 """
-from __future__ import annotations
+from typing import Dict
 from datetime import datetime
 
 import requests
@@ -17,7 +17,7 @@ class Ragic:
     """
     _base_url = 'https://na3.ragic.com'
 
-    def _get_data(self, api_route: str, params: dict) -> requests.Response:
+    def _get_data(self, api_route: str, params: Dict) -> requests.Response:
         """
         Get data from the specified API route
         :param api_route: an API route in Ragic
@@ -33,7 +33,7 @@ class Ragic:
             Logger.info(f"Data sent to {url}.")
         return response
 
-    def _send_data(self, api_route: str, data: dict) -> requests.Response:
+    def _send_data(self, api_route: str, data: Dict) -> requests.Response:
         """
         Send data to the specified API route.
         :param api_route: an API route in Ragic
@@ -49,7 +49,7 @@ class Ragic:
             Logger.info(f"Data sent to {url}.")
         return response
 
-    def get_member_info(self, member_id: str) -> dict:
+    def get_member_info(self, member_id: str) -> Dict:
         """
         Get the current member's info
         :param member_id: the associated member ID
@@ -62,7 +62,7 @@ class Ragic:
         response = self._get_data(route, payload)
         return response.json()
 
-    def fetch_events(self, member_id: str) -> dict:
+    def fetch_events(self, member_id: str) -> Dict:
         """
         Retrieve active events that the member signed up for
         :param member_id: the associated member ID
@@ -76,7 +76,7 @@ class Ragic:
         response = self._get_data(route, payload)
         return response.json()
 
-    def _get_hours_detail(self, member_id: str, event_id: int) -> dict:
+    def _get_hours_detail(self, member_id: str, event_id: int) -> Dict:
         """
         Get the hours detail of the current member
         :param member_id: the associated member ID
@@ -94,7 +94,7 @@ class Ragic:
         response = self._get_data(route, payload)
         return response.json()
 
-    def _clock_in(self, eid: str, member_id: str, event_id: int) -> dict:
+    def _clock_in(self, eid: str, member_id: str, event_id: int) -> Dict:
         """
         Clock in by creating a new record in hours detail
         :param member_id: the associated member ID
@@ -114,7 +114,7 @@ class Ragic:
         response = self._send_data(route, payload)
         return response.json()
 
-    def _clock_out(self, record_id: str) -> dict:
+    def _clock_out(self, record_id: str) -> Dict:
         """
         Clock out by modifying an existing record in hours detail
         :param record_id: the ID of the record to modify
