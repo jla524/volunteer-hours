@@ -16,8 +16,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          submodules: 'true'
 
       - name: Set up Python version
         uses: actions/setup-python@v1
@@ -31,6 +29,8 @@ jobs:
       
       - name: Install dependencies
         run: pip install -r requirements.txt
+        
+      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'lynclock'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B6E45092F5624A09BA48DF24356471D1 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C565F47FF7814854AAC5DBD6A77C5F01 }}
