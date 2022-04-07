@@ -41,7 +41,7 @@ jobs:
             !venv/
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: debian-latest
     needs: build
     environment:
       name: 'Production'
