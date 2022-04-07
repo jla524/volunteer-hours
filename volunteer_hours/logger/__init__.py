@@ -2,10 +2,10 @@
 Set up a thread safe singleton meta class
 Adapted from https://github.com/mattcoding4days/kickstart
 '''
-from typing import Any
+from typing import Dict, Any
 from volunteer_hours import Config
 
-LOGGING_CONFIG: dict[str, Any] = {
+LOGGING_CONFIG: Dict[str, Any] = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
