@@ -16,8 +16,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          submodules: 'true'
 
       - name: Set up Python version
         uses: actions/setup-python@v1
@@ -62,4 +60,4 @@ jobs:
         with:
           app-name: 'lynclock'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CFE899AA5B864AB5A8B1374BE397A091 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8085C1A6728A4D628B9D265EB1CB9121 }}
