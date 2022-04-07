@@ -2,6 +2,7 @@
 A wrapper for the Ragic API
 """
 from datetime import datetime
+from __future__ import annotations
 
 import requests
 
