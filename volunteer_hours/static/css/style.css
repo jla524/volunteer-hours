@@ -35,6 +35,7 @@ select {
 }
 
 option {
+	white-space: nowrap;
 	height: 80px;
 	font-size: 15px;
 }
