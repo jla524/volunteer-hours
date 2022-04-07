@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'lyn-clock'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FC59649270F74C47B2D5B01E01123F84 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B469CE70E7704027937ADD026A2C48EC }}
