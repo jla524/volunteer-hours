@@ -7,21 +7,19 @@ div {
 	margin-bottom: 16px;
 }
 
-h1 {
-	font-family: Arial, Helvetica, sans-serif;
-}
-
 h2 {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
 h3 {
+	font-size: 22px;
 	margin-bottom: 5px;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
 p {
 	margin: 0px;
+	font-size: 20px;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -30,15 +28,15 @@ label {
 }
 
 select {
-	font-size: 18px;
+	font-size: 22px;
 }
 
 option {
-	font-size: 18px;
+	font-size: 22px;
 	white-space: nowrap;
 }
 
 input {
 	width: 125px;
-	font-size: 18px;
+	font-size: 22px;
 }
