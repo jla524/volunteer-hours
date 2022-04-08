@@ -29,11 +29,11 @@ label {
 
 select {
 	font-size: 22px;
+	white-space: nowrap;
 }
 
 option {
 	font-size: 22px;
-	white-space: nowrap;
 }
 
 input {
