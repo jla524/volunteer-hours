@@ -14,27 +14,19 @@
 	   <link rel='stylesheet' type='text/css' href={{url_for('static', filename='css/style.css')}}>
     </head>
     <body>
-        <h2>Welcome! Please scan your QR code.</h2>
+        <h1>Welcome! Please scan your QR code.</h1>
         <div id='video-container'>
             <video id='qr-video'></video>
         </div>
         <div>
-            <select id='inversion-mode-select'>
-                <option value='original'>Scan original (dark QR code on bright background)</option>
-                <option value='invert'>Scan with inverted colors (bright QR code on dark background)</option>
-                <option value='both'>Scan both</option>
-            </select>
-            <br>
-        </div>
-        <div>
-			<h3>Preferred camera:</h3>
+			<h2>Preferred camera:</h2>
             <select id='cam-list'>
                 <option value='environment' selected>Environment Facing (default)</option>
                 <option value='user'>User Facing</option>
             </select>
         </div>
         <div>
-			<h3>Detected QR code:</h3>
+			<h2>Detected QR code:</h2>
 			<p><span id='cam-qr-result'>None</span></p>
         </div>
         <br>
@@ -95,10 +87,6 @@
             
             // for debugging
             window.scanner = scanner;
-            
-            document.getElementById('inversion-mode-select').addEventListener('change', event => {
-                scanner.setInversionMode(event.target.value);
-            });
             
             camList.addEventListener('change', event => {
                 scanner.setCamera(event.target.value);
