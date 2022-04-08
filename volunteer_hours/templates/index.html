@@ -14,7 +14,7 @@
 	   <link rel='stylesheet' type='text/css' href={{url_for('static', filename='css/style.css')}}>
     </head>
     <body>
-        <h1>Welcome! Please scan your QR code.</h1>
+        <h2>Welcome! Please scan your QR code.</h2>
         <div id='video-container'>
             <video id='qr-video'></video>
         </div>
@@ -27,14 +27,14 @@
             <br>
         </div>
         <div>
-			<h3><b>Preferred camera:</b></h3>
+			<h3>Preferred camera:</h3>
             <select id='cam-list'>
                 <option value='environment' selected>Environment Facing (default)</option>
                 <option value='user'>User Facing</option>
             </select>
         </div>
         <div>
-			<h3><b>Detected QR code:</b></h3>
+			<h3>Detected QR code:</h3>
 			<p><span id='cam-qr-result'>None</span></p>
         </div>
         <br>

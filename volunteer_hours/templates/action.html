@@ -9,7 +9,7 @@
         <form id='sent' action='/sent'>
 			<h2><b>Signed in as {{name}}</b></h2>
             <div>
-				<h3><label for='event'><b>Event to clock in/out for</b></label></h3>
+				<h3><label for='event'>Event to clock in/out for</label></h3>
                 <select id='event' name='event' method='GET' action='/'>
                     {% for event in events %}
                         <option value="{{event}}">{{event}}</option>
