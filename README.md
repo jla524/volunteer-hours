@@ -1,6 +1,6 @@
 # Volunteer Hours
 
-A web page for volunteers to clock in and out with their QR codes.
+A website for volunteers to clock in and out with their QR codes.
 
 ## Quickstart Guide
 
