@@ -1,12 +1,11 @@
 """
 A wrapper for the Ragic API
 """
-from datetime import datetime
-
 import requests
 
 from volunteer_hours import Config
 from volunteer_hours.logger.pkg_logger import Logger
+from volunteer_hours.common.timenow import LocalTime
 from volunteer_hours.common.enums import Http, Members, Attendance, Hours
 
 
@@ -83,7 +82,7 @@ class Ragic:
         :return: hours detail from Ragic
         """
         route = Config.ragic_hours_detail()
-        date = datetime.now().strftime(Config.date_format())
+        date = LocalTime().today()
         conditions = [f'{Hours.STATUS},eq,Incomplete',
                       f'{Hours.DATE},eq,{date}',
                       f'{Hours.EVENT_ID},eq,{event_id}',
@@ -101,9 +100,8 @@ class Ragic:
         :return: response data from Ragic
         """
         route = Config.ragic_hours_detail()
-        now = datetime.now()
-        date = now.strftime(Config.date_format())
-        time = now.strftime(Config.time_format())
+        date = LocalTime().today()
+        time = LocalTime().now()
         payload = {Hours.EID: eid,
                    Hours.DATE: date,
                    Hours.EVENT_ID: event_id,
@@ -120,7 +118,7 @@ class Ragic:
         :return: response data from Ragic
         """
         route = f'{Config.ragic_hours_detail()}/{record_id}'
-        time = datetime.now().strftime(Config.time_format())
+        time = LocalTime().now()
         payload = {Hours.END_TIME: time}
 
         response = self._send_data(route, payload)

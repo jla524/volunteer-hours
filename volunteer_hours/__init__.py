@@ -46,6 +46,7 @@ class Config(metaclass=ThreadSafeMeta):
         __ragic_hours_detail = 'lynvolunteer/lyn-temp/55'
         __date_format = '%Y/%m/%d'
         __time_format = '%H:%M'
+        __timezone_name = 'America/Vancouver'
         __member_prefix = 'LYN'
     except KeyError as error:
         sys.stderr.write(f"Dotenv config error: {error} is missing\n")
@@ -134,6 +135,13 @@ class Config(metaclass=ThreadSafeMeta):
         Getter for time format
         """
         return cls.__time_format
+
+    @classmethod
+    def timezone_name(cls) -> str:
+        """
+        Getter for timezone name
+        """
+        return cls.__timezone_name
 
     @classmethod
     def member_prefix(cls) -> str:
