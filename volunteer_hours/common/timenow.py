@@ -47,4 +47,4 @@ class LocalTime:
         """
         start_time = datetime.combine(date.today(), time.fromisoformat(before))
         end_time = datetime.today().astimezone(self.timezone)
-        return (end_time - start_time).seconds // 60
+        return (end_time.replace(tzinfo=None) - start_time).seconds // 60

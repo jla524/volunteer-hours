@@ -141,8 +141,8 @@ class Ragic:
             # Prevent users from clocking in again after clocking out
             if hour_details['Status'] == 'Completed':
                 return "You have already clocked out."
-            # Prevent users from clocking out within 5 minutes of clocking in
-            if self.local_time.delta_minutes(hour_details['Start Time']) <= 5:
+            # Prevent users from clocking out within 10 minutes of clocking in
+            if self.local_time.delta_minutes(hour_details['Start Time']) < 10:
                 return "You are already clocked in."
             self._clock_out(record_id)
             return "Clocked out successfully."
