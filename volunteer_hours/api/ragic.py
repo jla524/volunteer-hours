@@ -16,7 +16,7 @@ class Ragic:
     _base_url = 'https://na3.ragic.com'
 
     def __init__(self):
-        self.local_time = LocalTime()
+        self._local_time = LocalTime()
 
     def _get_data(self, api_route: str, params: dict) -> requests.Response:
         """
@@ -85,7 +85,7 @@ class Ragic:
         :return: hours detail from Ragic
         """
         route = Config.ragic_hours_detail()
-        date = self.local_time.today()
+        date = self._local_time.today()
         conditions = [f'{Hours.DATE},eq,{date}',
                       f'{Hours.EVENT_ID},eq,{event_id}',
                       f'{Hours.NEW_MEMBERSHIP_ID},eq,{member_id}']
@@ -102,8 +102,8 @@ class Ragic:
         :return: response data from Ragic
         """
         route = Config.ragic_hours_detail()
-        date = self.local_time.today()
-        time = self.local_time.now()
+        date = self._local_time.today()
+        time = self._local_time.now()
         payload = {Hours.EID: eid,
                    Hours.DATE: date,
                    Hours.EVENT_ID: event_id,
@@ -120,7 +120,7 @@ class Ragic:
         :return: response data from Ragic
         """
         route = f'{Config.ragic_hours_detail()}/{record_id}'
-        time = self.local_time.now()
+        time = self._local_time.now()
         payload = {Hours.END_TIME: time}
 
         response = self._send_data(route, payload)
@@ -142,7 +142,7 @@ class Ragic:
             if hour_details['Status'] == 'Completed':
                 return "You have already clocked out."
             # Prevent users from clocking out within 10 minutes of clocking in
-            if self.local_time.delta_minutes(hour_details['Start Time']) < 10:
+            if self._local_time.delta_minutes(hour_details['Start Time']) < 10:
                 return "You are already clocked in."
             self._clock_out(record_id)
             return "Clocked out successfully."
