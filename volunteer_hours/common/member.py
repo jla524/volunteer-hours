@@ -3,6 +3,7 @@ Define class for member
 """
 from volunteer_hours import Config
 from volunteer_hours.api.ragic import Ragic
+from volunteer_hours.logger.pkg_logger import Logger
 
 
 class Member:
@@ -30,7 +31,7 @@ class Member:
         """
         valid_prefix = Config.member_prefix()
         if member_id.startswith(valid_prefix):
-            print(f"Setting member ID to {member_id}")
+            Logger.info(f"Setting member ID to {member_id}")
             self._member_id = member_id
 
     def reset_member(self) -> None:
