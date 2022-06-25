@@ -134,6 +134,10 @@ class Ragic:
         :param event_id: the ID of the selected event
         :return: a message to the member
         """
+        # Prevent users from signing in without an event
+        if event_id == -1:
+            return "Unable to find an event. Please contact a volunteer coordinator."
+
         hours_info = self._get_hours_detail(member_id, event_id)
         record_id = list(hours_info.keys())[0] if hours_info else ""
 
