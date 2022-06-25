@@ -12,6 +12,7 @@ class ThreadSafeMeta(type):
     """
     A thread-safe implementation of Singleton
     """
+
     _instances: dict = {}
     _lock = Lock()
 
@@ -33,21 +34,22 @@ class Config(metaclass=ThreadSafeMeta):
       configuration from a .env file, once and only once into this object,
       this object can be used through-out the code base
     """
+
     try:
-        __package = 'volunteer_hours'
-        __version = '1.0.0'
-        __default_env = 'dev'
-        __logfile_name = f'{__package}-{__version}.log'
-        __env = os.getenv('APP_ENV')
-        __ragic_api_key = os.getenv('RAGIC_API_KEY')
-        __config_dir = Path().home() / '.config' / __package
-        __ragic_members_route = 'lynvolunteer/lyn-temp/53'
-        __ragic_attendance_route = 'lynvolunteer/lyn-temp/9'
-        __ragic_hours_detail = 'lynvolunteer/lyn-temp/55'
-        __date_format = '%Y/%m/%d'
-        __time_format = '%H:%M'
-        __timezone_name = 'America/Vancouver'
-        __member_prefix = 'LYN'
+        __package = "volunteer_hours"
+        __version = "1.0.0"
+        __default_env = "dev"
+        __logfile_name = f"{__package}-{__version}.log"
+        __env = os.getenv("APP_ENV")
+        __ragic_api_key = os.getenv("RAGIC_API_KEY")
+        __config_dir = Path().home() / ".config" / __package
+        __ragic_members_route = "lynvolunteer/lyn-temp/53"
+        __ragic_attendance_route = "lynvolunteer/lyn-temp/9"
+        __ragic_hours_detail = "lynvolunteer/lyn-temp/55"
+        __date_format = "%Y/%m/%d"
+        __time_format = "%H:%M"
+        __timezone_name = "America/Vancouver"
+        __member_prefix = "LYN"
     except KeyError as error:
         sys.stderr.write(f"Dotenv config error: {error} is missing\n")
         sys.exit(1)

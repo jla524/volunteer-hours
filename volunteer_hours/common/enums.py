@@ -8,6 +8,7 @@ class Http:
     """
     HTTP response codes
     """
+
     OK = 200
     CREATED = 201
     BAD = 400
@@ -19,6 +20,7 @@ class Members:
     """
     Members data fields
     """
+
     MEMBERSHIP_ID = 1003767
 
 
@@ -26,6 +28,7 @@ class Attendance:
     """
     Attendance data fields
     """
+
     MEMBERSHIP_ID = 1003777
     FIRST_NAME = 1003903
     LAST_NAME = 1003904
@@ -38,6 +41,7 @@ class Hours:
     """
     Hours detail data fields
     """
+
     EID = 1003813
     DATE = 1003908
     EVENT_ID = 1003914

@@ -13,7 +13,8 @@ class Ragic:
     """
     Use the requests library to talk to the Ragic API
     """
-    _base_url = 'https://na3.ragic.com'
+
+    _base_url = "https://na3.ragic.com"
 
     def __init__(self):
         self._local_time = LocalTime()
@@ -25,11 +26,10 @@ class Ragic:
         :param params: parameters to send to Ragic
         :return: a response object from Ragic
         """
-        url = f'{self._base_url}/{api_route}'
+        url = f"{self._base_url}/{api_route}"
         api_key = Config.ragic_api_key()
-        headers = {'Authorization': f'Basic {api_key}'}
+        headers = {"Authorization": f"Basic {api_key}"}
         response = requests.get(url, headers=headers, params=params)
-
         if response.status_code == Http.OK:
             Logger.info(f"Data sent to {url}.")
         return response
@@ -41,11 +41,10 @@ class Ragic:
         :param data: data to send to Ragic
         :return: a response object from Ragic
         """
-        url = f'{self._base_url}/{api_route}'
+        url = f"{self._base_url}/{api_route}"
         api_key = Config.ragic_api_key()
-        headers = {'Authorization': f'Basic {api_key}'}
+        headers = {"Authorization": f"Basic {api_key}"}
         response = requests.post(url, data=data, headers=headers)
-
         if response.status_code == Http.OK:
             Logger.info(f"Data sent to {url}.")
         return response
@@ -57,9 +56,8 @@ class Ragic:
         :return: info of the member
         """
         route = Config.ragic_members_route()
-        condition = [f'{Members.MEMBERSHIP_ID},eq,{member_id}']
-        payload = {'where': condition, 'api': ''}
-
+        condition = [f"{Members.MEMBERSHIP_ID},eq,{member_id}"]
+        payload = {"where": condition, "api": ""}
         response = self._get_data(route, payload)
         return response.json()
 
@@ -70,10 +68,11 @@ class Ragic:
         :return: events data from Ragic
         """
         route = Config.ragic_attendance_route()
-        conditions = [f'{Attendance.TIMECLOCK_STATUS},eq,Open',
-                      f'{Attendance.MEMBERSHIP_ID},eq,{member_id}']
-        payload = {'where': conditions, 'api': ''}
-
+        conditions = [
+            f"{Attendance.TIMECLOCK_STATUS},eq,Open",
+            f"{Attendance.MEMBERSHIP_ID},eq,{member_id}",
+        ]
+        payload = {"where": conditions, "api": ""}
         response = self._get_data(route, payload)
         return response.json()
 
@@ -86,10 +85,12 @@ class Ragic:
         """
         route = Config.ragic_hours_detail()
         date = self._local_time.today()
-        conditions = [f'{Hours.DATE},eq,{date}',
-                      f'{Hours.EVENT_ID},eq,{event_id}',
-                      f'{Hours.NEW_MEMBERSHIP_ID},eq,{member_id}']
-        payload = {'where': conditions, 'api': ''}
+        conditions = [
+            f"{Hours.DATE},eq,{date}",
+            f"{Hours.EVENT_ID},eq,{event_id}",
+            f"{Hours.NEW_MEMBERSHIP_ID},eq,{member_id}",
+        ]
+        payload = {"where": conditions, "api": ""}
 
         response = self._get_data(route, payload)
         return response.json()
@@ -104,12 +105,13 @@ class Ragic:
         route = Config.ragic_hours_detail()
         date = self._local_time.today()
         time = self._local_time.now()
-        payload = {Hours.EID: eid,
-                   Hours.DATE: date,
-                   Hours.EVENT_ID: event_id,
-                   Hours.NEW_MEMBERSHIP_ID: member_id,
-                   Hours.START_TIME: time}
-
+        payload = {
+            Hours.EID: eid,
+            Hours.DATE: date,
+            Hours.EVENT_ID: event_id,
+            Hours.NEW_MEMBERSHIP_ID: member_id,
+            Hours.START_TIME: time,
+        }
         response = self._send_data(route, payload)
         return response.json()
 
@@ -119,10 +121,9 @@ class Ragic:
         :param record_id: the ID of the record to modify
         :return: response data from Ragic
         """
-        route = f'{Config.ragic_hours_detail()}/{record_id}'
+        route = f"{Config.ragic_hours_detail()}/{record_id}"
         time = self._local_time.now()
         payload = {Hours.END_TIME: time}
-
         response = self._send_data(route, payload)
         return response.json()
 
@@ -134,21 +135,21 @@ class Ragic:
         :return: a message to the member
         """
         hours_info = self._get_hours_detail(member_id, event_id)
-        record_id = list(hours_info.keys())[0] if hours_info else ''
+        record_id = list(hours_info.keys())[0] if hours_info else ""
 
         if record_id:
             hour_details = hours_info[record_id]
             # Prevent users from clocking in again after clocking out
-            if hour_details['Status'] == 'Completed':
+            if hour_details["Status"] == "Completed":
                 return "You have already clocked out."
             # Prevent users from clocking out within 10 minutes of clocking in
-            if self._local_time.delta_minutes(hour_details['Start Time']) < 10:
+            if self._local_time.delta_minutes(hour_details["Start Time"]) < 10:
                 return "You are already clocked in."
             self._clock_out(record_id)
             return "Clocked out successfully."
 
         attendance_info = self.fetch_events(member_id)
         event_details = list(attendance_info.values())[0]
-        eid = event_details['EID']
+        eid = event_details["EID"]
         self._clock_in(eid, member_id, event_id)
         return "Clocked in successfully."

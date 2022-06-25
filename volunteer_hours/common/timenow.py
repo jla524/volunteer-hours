@@ -12,6 +12,7 @@ class LocalTime:
     """
     A wrapper for the datetime module
     """
+
     def __init__(self):
         self.__timezone = timezone(Config.timezone_name())
 
