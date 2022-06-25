@@ -70,5 +70,5 @@ class Member:
         :return: an Event ID
         """
         if not self._events or event_name not in self._events:
-            raise ValueError('Event not found')
+            return -1
         return self._events[event_name]
