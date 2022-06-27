@@ -30,7 +30,6 @@ class Ragic:
         api_key = Config.ragic_api_key()
         headers = {"Authorization": f"Basic {api_key}"}
         response = requests.get(url, headers=headers, params=params)
-
         if response.status_code == Http.OK:
             Logger.info(f"Data sent to {url}.")
         return response
@@ -46,7 +45,6 @@ class Ragic:
         api_key = Config.ragic_api_key()
         headers = {"Authorization": f"Basic {api_key}"}
         response = requests.post(url, data=data, headers=headers)
-
         if response.status_code == Http.OK:
             Logger.info(f"Data sent to {url}.")
         return response
@@ -60,7 +58,6 @@ class Ragic:
         route = Config.ragic_members_route()
         condition = [f"{Members.MEMBERSHIP_ID},eq,{member_id}"]
         payload = {"where": condition, "api": ""}
-
         response = self._get_data(route, payload)
         return response.json()
 
@@ -76,7 +73,6 @@ class Ragic:
             f"{Attendance.MEMBERSHIP_ID},eq,{member_id}",
         ]
         payload = {"where": conditions, "api": ""}
-
         response = self._get_data(route, payload)
         return response.json()
 
@@ -95,7 +91,6 @@ class Ragic:
             f"{Hours.NEW_MEMBERSHIP_ID},eq,{member_id}",
         ]
         payload = {"where": conditions, "api": ""}
-
         response = self._get_data(route, payload)
         return response.json()
 
@@ -116,7 +111,6 @@ class Ragic:
             Hours.NEW_MEMBERSHIP_ID: member_id,
             Hours.START_TIME: time,
         }
-
         response = self._send_data(route, payload)
         return response.json()
 
@@ -129,7 +123,6 @@ class Ragic:
         route = f"{Config.ragic_hours_detail()}/{record_id}"
         time = self._local_time.now()
         payload = {Hours.END_TIME: time}
-
         response = self._send_data(route, payload)
         return response.json()
 
@@ -144,9 +137,12 @@ class Ragic:
         if event_id == -1:
             return "Unable to find an event. Please contact a volunteer coordinator."
 
+        # Prompt users to try again if no hours detail
         hours_info = self._get_hours_detail(member_id, event_id)
-        record_id = list(hours_info.keys())[0] if hours_info else ""
+        if not hours_info:
+            return "Unable to retrieve hours info. Please try again later."
 
+        record_id = list(hours_info.keys())[0]
         if record_id:
             hour_details = hours_info[record_id]
             # Prevent users from clocking in again after clocking out

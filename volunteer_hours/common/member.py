@@ -70,6 +70,6 @@ class Member:
         Find the event ID corresponding to the event name
         :return: an Event ID
         """
-        if not self._events or event_name not in self._events:
+        if event_name not in self._events:
             return -1
         return self._events[event_name]
