@@ -91,7 +91,6 @@ class Ragic:
             f"{Hours.NEW_MEMBERSHIP_ID},eq,{member_id}",
         ]
         payload = {"where": conditions, "api": ""}
-
         response = self._get_data(route, payload)
         return response.json()
 
@@ -138,9 +137,12 @@ class Ragic:
         if event_id == -1:
             return "Unable to find an event. Please contact a volunteer coordinator."
 
+        # Prompt users to try again if no hours detail
         hours_info = self._get_hours_detail(member_id, event_id)
-        record_id = list(hours_info.keys())[0] if hours_info else ""
+        if not hours_info:
+            return "Unable to retrieve hours info. Please try again later."
 
+        record_id = list(hours_info.keys())[0]
         if record_id:
             hour_details = hours_info[record_id]
             # Prevent users from clocking in again after clocking out
