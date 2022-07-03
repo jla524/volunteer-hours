@@ -137,25 +137,21 @@ class Ragic:
         if event_id == -1:
             return "Unable to find an event. Please contact a volunteer coordinator."
 
-        # Prompt users to try again if no hours detail
         hours_info = self._get_hours_detail(member_id, event_id)
         if not hours_info:
-            return "Unable to retrieve hours info. Please try again later."
+            attendance_info = self.fetch_events(member_id)
+            event_details = list(attendance_info.values())[0]
+            eid = event_details["EID"]
+            self._clock_in(eid, member_id, event_id)
+            return "Clocked in successfully."
 
         record_id = list(hours_info.keys())[0]
-        if record_id:
-            hour_details = hours_info[record_id]
-            # Prevent users from clocking in again after clocking out
-            if hour_details["Status"] == "Completed":
-                return "You have already clocked out."
-            # Prevent users from clocking out within 10 minutes of clocking in
-            if self._local_time.delta_minutes(hour_details["Start Time"]) < 10:
-                return "You are already clocked in."
-            self._clock_out(record_id)
-            return "Clocked out successfully."
-
-        attendance_info = self.fetch_events(member_id)
-        event_details = list(attendance_info.values())[0]
-        eid = event_details["EID"]
-        self._clock_in(eid, member_id, event_id)
-        return "Clocked in successfully."
+        hour_details = hours_info[record_id]
+        # Prevent users from clocking in again after clocking out
+        if hour_details["Status"] == "Completed":
+            return "You have already clocked out."
+        # Prevent users from clocking out within 10 minutes of clocking in
+        if self._local_time.delta_minutes(hour_details["Start Time"]) < 10:
+            return "You are already clocked in."
+        self._clock_out(record_id)
+        return "Clocked out successfully."
