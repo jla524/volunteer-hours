@@ -1,7 +1,7 @@
 """
 A Flask application for logging volunteer hours
 """
-from flask import Flask, request, render_template, make_response
+from flask import Flask, request, render_template
 
 from volunteer_hours.api.ragic import Ragic
 from volunteer_hours.common.member import Member
