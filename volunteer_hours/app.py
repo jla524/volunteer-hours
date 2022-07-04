@@ -1,7 +1,7 @@
 """
 A Flask application for logging volunteer hours
 """
-from flask import Flask, request, render_template, make_response
+from flask import Flask, request, render_template
 
 from volunteer_hours.api.ragic import Ragic
 from volunteer_hours.common.member import Member
@@ -30,10 +30,7 @@ def action_screen() -> str:
     if request.method == "POST":
         member_id = request.form.get("member_id")
         member.member_id = member_id
-        response = make_response("{{'response': {member_id}}")
-        response.headers = {"Content-Type": "application/json"}
-        return response
-
+        return f"Received {member_id}"
     name = member.get_member_name()
     events = member.get_event_names()
     content = render_template("action.html", name=name, events=events)
