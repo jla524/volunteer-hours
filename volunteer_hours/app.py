@@ -30,10 +30,7 @@ def action_screen() -> str:
     if request.method == "POST":
         member_id = request.form.get("member_id")
         member.member_id = member_id
-        response = make_response("{{'response': {member_id}}")
-        response.headers = {"Content-Type": "application/json"}
-        return response
-
+        return f"Received {member_id}"
     name = member.get_member_name()
     events = member.get_event_names()
     content = render_template("action.html", name=name, events=events)
