@@ -136,15 +136,17 @@ class Ragic:
         # Prevent users from signing in without an event
         if event_id == -1:
             return "Unable to find an event. Please contact a volunteer coordinator."
-
         hours_info = self._get_hours_detail(member_id, event_id)
         if not hours_info:
             attendance_info = self.fetch_events(member_id)
+            # Display an error message if no events availble
+            if not attendance_info:
+                return "Unable to retrieve attendance info. Please try again later."
+            # Sign in by filling out the member's info, event, and start time
             event_details = list(attendance_info.values())[0]
             eid = event_details["EID"]
             self._clock_in(eid, member_id, event_id)
             return "Clocked in successfully."
-
         record_id = list(hours_info.keys())[0]
         hour_details = hours_info[record_id]
         # Prevent users from clocking in again after clocking out
@@ -153,5 +155,6 @@ class Ragic:
         # Prevent users from clocking out within 10 minutes of clocking in
         if self._local_time.delta_minutes(hour_details["Start Time"]) < 10:
             return "You are already clocked in."
+        # Clock out by filling out the end time
         self._clock_out(record_id)
         return "Clocked out successfully."
